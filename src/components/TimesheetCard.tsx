@@ -79,12 +79,17 @@ export default function TimesheetCard() {
   }
 
   const handleClearEntries = async () => {
-    const response = await fetch('/api/clear-entries', {
+    const response = await fetch('/api/timesheet', {
       method: 'DELETE',
     });
 
     if (response.ok) {
       setEntries([]);
+      toast({
+        title: "Cleared Entries",
+        description: "Cleared your entries!",
+        duration: 3000,
+      })
     } else {
       console.error('Failed to clear entries');
     }
