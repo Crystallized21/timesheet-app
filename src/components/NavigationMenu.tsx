@@ -13,6 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { UserButton } from "@clerk/nextjs"
+import {ThemeToggle} from "@/components/ThemeToggle";
 
 export function NavigationMenuBar() {
   return (
@@ -61,6 +62,7 @@ export function NavigationMenuBar() {
           </NavigationMenuList>
         </NavigationMenu>
         <div className="ml-auto flex items-center space-x-4">
+          <ThemeToggle />
           <UserButton />
         </div>
       </div>
