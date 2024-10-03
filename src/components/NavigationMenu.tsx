@@ -13,12 +13,22 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { UserButton } from "@clerk/nextjs"
-import {ThemeToggle} from "@/components/ThemeToggle";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHistory, faPlus, IconDefinition} from "@fortawesome/free-solid-svg-icons";
-import {faClock} from "@fortawesome/free-regular-svg-icons";
+import { ThemeToggle } from "@/components/ThemeToggle"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHistory, faPlus, IconDefinition } from "@fortawesome/free-solid-svg-icons"
+import { faClock } from "@fortawesome/free-regular-svg-icons"
 
 export function NavigationMenuBar() {
+  const [isMounted, setIsMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
+
   return (
     <nav className="border-b">
       <div className="flex h-16 items-center px-4">
@@ -98,6 +108,6 @@ const ListItem = React.forwardRef<
         </a>
       </NavigationMenuLink>
     </li>
-  );
-});
-ListItem.displayName = "ListItem";
+  )
+})
+ListItem.displayName = "ListItem"
