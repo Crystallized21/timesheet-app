@@ -2,6 +2,7 @@
 
 import { SignedIn, SignedOut, SignInButton, useAuth } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import DashboardPage from "@/components/dashboard/DashboardPage";
 
 export default function Home() {
   const { isLoaded } = useAuth();
@@ -15,7 +16,7 @@ export default function Home() {
       <div className="bg-background flex flex-col justify-center items-center min-h-screen">
         <SignedIn>
           <div className="w-full max-w-5xl mx-auto">
-            <p>wip...</p>
+            <DashboardPage/>
           </div>
         </SignedIn>
         <SignedOut>
