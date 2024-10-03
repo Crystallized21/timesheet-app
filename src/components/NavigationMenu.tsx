@@ -30,7 +30,7 @@ export function NavigationMenuBar() {
   }
 
   return (
-    <nav className="border-b">
+    <nav className="sticky top-0 border-b bg-background z-10">
       <div className="flex h-16 items-center px-4">
         <NavigationMenu>
           <NavigationMenuList>
