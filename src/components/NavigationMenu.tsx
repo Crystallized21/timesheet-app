@@ -14,9 +14,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { UserButton } from "@clerk/nextjs"
 import { ThemeToggle } from "@/components/ThemeToggle"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHistory, faPlus, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import { faClock } from "@fortawesome/free-regular-svg-icons"
+import { PlusCircle, Clock, History } from "lucide-react"
 
 export function NavigationMenuBar() {
   const [isMounted, setIsMounted] = React.useState(false)
@@ -60,13 +58,13 @@ export function NavigationMenuBar() {
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                  <ListItem href="/timesheets/create" title="Create" icon={faPlus}>
+                  <ListItem href="/timesheets/create" title="Create" icon={PlusCircle}>
                     Create a new timesheet entry
                   </ListItem>
-                  <ListItem href="/timesheets/pending" title="Pending" icon={faClock}>
+                  <ListItem href="/timesheets/pending" title="Pending" icon={Clock}>
                     View and edit pending timesheets
                   </ListItem>
-                  <ListItem href="/timesheets/history" title="History" icon={faHistory}>
+                  <ListItem href="/timesheets/history" title="History" icon={History}>
                     Access your timesheet history
                   </ListItem>
                 </ul>
@@ -85,8 +83,8 @@ export function NavigationMenuBar() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { icon: IconDefinition }
->(({ className, title, children, icon, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { icon: React.ComponentType<React.SVGProps<SVGSVGElement>> }
+>(({ className, title, children, icon: Icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -99,7 +97,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="flex items-center space-x-2">
-            <FontAwesomeIcon icon={icon} />
+            <Icon className="h-4 w-4" />
             <div className="text-sm font-medium leading-none">{title}</div>
           </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">

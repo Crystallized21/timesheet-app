@@ -36,7 +36,7 @@ export default function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Total Hours This Month
                 </CardTitle>
-                <Clock className="h-4 w-4 text-muted-foreground" />
+                <Clock className="h-4 w-4 text-muted-foreground"/>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">145.5</div>
