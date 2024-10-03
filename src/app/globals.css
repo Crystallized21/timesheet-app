@@ -74,3 +74,39 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.animate-gradient {
+  background: linear-gradient(220deg, rgba(255, 126, 95, 0.33), rgba(254, 180, 123, 0.16), rgba(255, 126, 95, 0.61), #6a11cb, #2575fc, #6a11cb);
+  background-size: 600% 600%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes light-mode-gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.light-mode-animate-gradient {
+  background: linear-gradient(220deg, rgba(255, 223, 186, 0.33), rgba(255, 249, 196, 0.16), rgba(255, 223, 186, 0.61), #ff9a9e, #fad0c4, #ff9a9e);
+  background-size: 600% 600%;
+  animation: light-mode-gradient 8s ease infinite;
+}

@@ -15,7 +15,7 @@ export default function Home() {
     <div className="relative min-h-screen">
       <div className="bg-background flex flex-col justify-center items-center min-h-screen">
         <SignedIn>
-          <div className="w-full max-w-5xl mx-auto">
+          <div className="w-full mx-auto">
             <DashboardPage/>
           </div>
         </SignedIn>
