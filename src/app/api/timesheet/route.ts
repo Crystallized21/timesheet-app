@@ -47,3 +47,21 @@ export async function GET() {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
 }
+
+export async function DELETE() {
+  try {
+    const { userId } = auth()
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    await prisma.timeEntry.deleteMany({
+      where: { userId },
+    })
+
+    return NextResponse.json({ message: 'Entries cleared successfully' })
+  } catch (error) {
+    console.error('Error clearing time entries:', error)
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+  }
+}

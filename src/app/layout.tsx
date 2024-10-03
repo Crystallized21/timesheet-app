@@ -4,6 +4,8 @@ import React from "react";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import {Toaster} from "@/components/ui/toaster";
+import {NavigationMenuBar} from "@/components/NavigationMenu";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,6 +27,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <NavigationMenuBar/>
             {children}
           </ThemeProvider>
         <Toaster/>

@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { SignedIn, SignedOut, useUser } from "@clerk/nextjs"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { useForm } from "react-hook-form"
+import {useEffect, useState} from "react"
+import {SignedIn, SignedOut, useUser} from "@clerk/nextjs"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
+import {useForm} from "react-hook-form"
 import DataEntryForm from "@/components/DataEntryForm"
 import TimeEntriesTable from "@/components/TimeEntriesTable"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useToast } from "@/hooks/use-toast"
+import {Skeleton} from "@/components/ui/skeleton"
+import {useToast} from "@/hooks/use-toast"
 
 interface TimeEntry {
   id: string
@@ -19,11 +19,11 @@ interface TimeEntry {
 }
 
 export default function TimesheetCard() {
-  const { user } = useUser()
+  const {user} = useUser()
   const [entries, setEntries] = useState<TimeEntry[]>([])
   const [loading, setLoading] = useState(true)
   const form = useForm<Omit<TimeEntry, 'id' | 'hours'>>()
-  const { toast } = useToast()
+  const {toast} = useToast()
 
   useEffect(() => {
     if (user) {
@@ -79,12 +79,21 @@ export default function TimesheetCard() {
   }
 
   const handleClearEntries = async () => {
-    // Implement your clear entries logic here
-    console.log("Clearing entries")
-    // You might want to call an API to clear the entries
-    await new Promise(resolve => setTimeout(resolve, 1000)) // Simulating API call
-    setEntries([])
-  }
+    const response = await fetch('/api/timesheet', {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      setEntries([]);
+      toast({
+        title: "Cleared Entries",
+        description: "Cleared your entries!",
+        duration: 3000,
+      })
+    } else {
+      console.error('Failed to clear entries');
+    }
+  };
 
   return (
     <div>
