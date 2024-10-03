@@ -25,7 +25,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-8">
         <div className="mb-4 sm:mb-0">
           <h2 className="text-3xl font-bold tracking-tight">

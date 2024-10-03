@@ -33,7 +33,7 @@ export default function TimesheetCard() {
 
   const fetchEntries = async () => {
     setLoading(true)
-    const response = await fetch('/api/timesheet')
+    const response = await fetch('/api/timesheets')
     if (response.ok) {
       const data = await response.json()
       setEntries(data.map((entry: TimeEntry) => ({
@@ -49,7 +49,7 @@ export default function TimesheetCard() {
     const endTime = new Date(`1970-01-01T${data.endTime}:00`)
     const hours = (endTime.getTime() - startTime.getTime()) / 3600000
 
-    const response = await fetch('/api/timesheet', {
+    const response = await fetch('/api/timesheets', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export default function TimesheetCard() {
   }
 
   const handleClearEntries = async () => {
-    const response = await fetch('/api/timesheet', {
+    const response = await fetch('/api/timesheets', {
       method: 'DELETE',
     });
 

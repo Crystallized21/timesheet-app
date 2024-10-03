@@ -12,8 +12,8 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen">
-      <div className="bg-background flex flex-col justify-center items-center min-h-screen">
+    <div>
+      <div className="bg-background flex flex-col justify-center items-center">
         <SignedIn>
           <div className="w-full mx-auto">
             <DashboardPage/>
