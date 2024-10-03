@@ -7,6 +7,8 @@ import { RecentSubmissions } from "@/components/dashboard/RecentSubmissions"
 import { Button } from "@/components/ui/button"
 import { PlusCircle, Clock, FileCheck, History } from "lucide-react"
 import Link from "next/link"
+import { useUser } from "@clerk/nextjs"
+import SkeletonDashboard from "@/components/dashboard/SkeletonDashboard";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -14,11 +16,19 @@ export const metadata: Metadata = {
 }
 
 export default function DashboardPage() {
+  const { user, isLoaded } = useUser()
+
+  if (!isLoaded) {
+    return <SkeletonDashboard/>;
+  }
+
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <div className="flex items-center space-x-2">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
+        <h2 className="text-3xl font-bold tracking-tight">
+          Welcome {user?.firstName} {user?.lastName}!
+        </h2>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
           <CalendarDateRangePicker />
           <Button>Download</Button>
         </div>
@@ -36,7 +46,7 @@ export default function DashboardPage() {
                 <CardTitle className="text-sm font-medium">
                   Total Hours This Month
                 </CardTitle>
-                <Clock className="h-4 w-4 text-muted-foreground"/>
+                <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">145.5</div>
@@ -93,7 +103,7 @@ export default function DashboardPage() {
             </Card>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
+            <Card className="col-span-4 lg:col-span-4 sm:col-span-7">
               <CardHeader>
                 <CardTitle>Overview</CardTitle>
               </CardHeader>
@@ -101,7 +111,7 @@ export default function DashboardPage() {
                 <Overview />
               </CardContent>
             </Card>
-            <Card className="col-span-3">
+            <Card className="col-span-3 lg:col-span-3 sm:col-span-7">
               <CardHeader>
                 <CardTitle>Recent Submissions</CardTitle>
                 <CardDescription>
