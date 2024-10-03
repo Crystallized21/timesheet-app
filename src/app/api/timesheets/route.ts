@@ -19,6 +19,7 @@ export async function POST(req: Request) {
         startTime,
         endTime,
         hours,
+        status: 'Pending',
       },
     })
 

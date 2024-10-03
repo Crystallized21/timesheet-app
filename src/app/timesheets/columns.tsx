@@ -16,13 +16,17 @@ import {
 
 export type Timesheet = {
   id: string
-  date: string
-  status: "Pending" | "Approved" | "Rejected"
-  totalHours: number
-  submittedAt: string
+  date: Date
+  project: string
+  startTime: string
+  endTime: string
+  hours: number
+  status: string
+  createdAt: Date
+  updatedAt: Date
 }
 
-export const columns: ColumnDef<Timesheet, unknown>[] = [
+export const columns: ColumnDef<Timesheet>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -55,6 +59,18 @@ export const columns: ColumnDef<Timesheet, unknown>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      const date = row.getValue("date") as Date
+      return <div>{date.toLocaleDateString()}</div>
+    },
+  },
+  {
+    accessorKey: "project",
+    header: "Project",
+  },
+  {
+    accessorKey: "hours",
+    header: "Hours",
   },
   {
     accessorKey: "status",
@@ -67,14 +83,6 @@ export const columns: ColumnDef<Timesheet, unknown>[] = [
         </Badge>
       )
     },
-  },
-  {
-    accessorKey: "totalHours",
-    header: "Total Hours",
-  },
-  {
-    accessorKey: "submittedAt",
-    header: "Submitted At",
   },
   {
     id: "actions",

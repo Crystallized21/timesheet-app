@@ -8,4 +8,8 @@ export const prisma =
     log: ['query'],
   })
 
+export async function getTimesheets() {
+  return prisma.timeEntry.findMany();
+}
+
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma

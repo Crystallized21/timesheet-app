@@ -33,7 +33,7 @@ export default function TimesheetCard() {
 
   const fetchEntries = async () => {
     setLoading(true)
-    const response = await fetch('/api/timesheet')
+    const response = await fetch('/api/timesheets')
     if (response.ok) {
       const data = await response.json()
       setEntries(data.map((entry: TimeEntry) => ({
