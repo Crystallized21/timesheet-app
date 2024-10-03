@@ -21,7 +21,7 @@ export type Timesheet = {
   submittedAt: string
 }
 
-export const columns: ColumnDef<Timesheet>[] = [
+export const columns: ColumnDef<{ id: string; date: string; status: string; totalHours: number; submittedAt: string; }>[] = [
   {
     accessorKey: "date",
     header: ({ column }) => {

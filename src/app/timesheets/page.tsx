@@ -1,4 +1,5 @@
-import { Metadata } from "next"
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CalendarDateRangePicker } from "@/components/dashboard/CalendarDateRangePicker"
@@ -7,11 +8,7 @@ import { PlusCircle, Clock, FileCheck, History } from "lucide-react"
 import Link from "next/link"
 import { DataTable } from "@/components/ui/data-table"
 import { columns } from "./columns"
-
-export const metadata: Metadata = {
-  title: "Timesheets",
-  description: "Manage your timesheets",
-}
+import {useUser} from "@clerk/nextjs";
 
 const timesheets = [
   {
@@ -38,10 +35,12 @@ const timesheets = [
 ]
 
 export default function TimesheetsPage() {
+  const { user } = useUser();
+
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Timesheets</h2>
+        <h2 className="text-3xl font-bold tracking-tight">Here is your timesheets, {user?.firstName}.</h2>
         <div className="flex items-center space-x-2">
           <CalendarDateRangePicker />
           <Button>Download</Button>
