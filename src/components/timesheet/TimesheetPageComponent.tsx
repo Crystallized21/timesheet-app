@@ -2,7 +2,7 @@ import { auth } from '@clerk/nextjs/server'
 import { prisma } from '@/lib/prisma'
 import TimesheetsClient from '@/components/timesheet/TimesheetsClient'
 
-async function getTimesheets(): Promise<{
+type TimeEntry = {
   date: Date;
   createdAt: Date;
   hours: number;
@@ -12,8 +12,10 @@ async function getTimesheets(): Promise<{
   endTime: Date;
   userId: string;
   status: string;
-  updatedAt: Date
-}[]> {
+  updatedAt: Date;
+}
+
+async function getTimesheets(): Promise<TimeEntry[]> {
   const { userId } = auth();
   if (!userId) throw new Error('Unauthorized');
 
@@ -22,7 +24,7 @@ async function getTimesheets(): Promise<{
     orderBy: { date: 'desc' },
   });
 
-  return timeEntries.map(entry => ({
+  return timeEntries.map((entry: TimeEntry) => ({
     ...entry,
     date: new Date(entry.date),
     startTime: entry.startTime,
