@@ -1,6 +1,6 @@
-import TimesheetsPage from "@/components/timesheet/TimesheetPageComponent";
 import {SignedIn, SignedOut, SignInButton} from "@clerk/nextjs";
 import {Button} from "@/components/ui/button";
+import TimesheetCard from "@/components/TimesheetCard";
 
 export default function TimesheetPage() {
   return (
@@ -8,7 +8,7 @@ export default function TimesheetPage() {
       <div className="bg-background flex flex-col justify-center items-center">
         <SignedIn>
           <div className="w-full mx-auto">
-            <TimesheetsPage/>
+            <TimesheetCard/>
           </div>
         </SignedIn>
         <SignedOut>

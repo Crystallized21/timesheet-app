@@ -2,20 +2,18 @@ import { auth } from '@clerk/nextjs/server'
 import { prisma } from '@/lib/prisma'
 import TimesheetsClient from '@/components/timesheet/TimesheetsClient'
 
-type TimesheetDTO = {
-  userId: string;
-  id: string;
-  date: string;
-  project: string;
-  startTime: string;
-  endTime: string;
+async function getTimesheets(): Promise<{
+  date: Date;
+  createdAt: Date;
   hours: number;
+  project: string;
+  startTime: Date;
+  id: string;
+  endTime: Date;
+  userId: string;
   status: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-async function getTimesheets(): Promise<TimesheetDTO[]> {
+  updatedAt: Date
+}[]> {
   const { userId } = auth();
   if (!userId) throw new Error('Unauthorized');
 
@@ -26,11 +24,11 @@ async function getTimesheets(): Promise<TimesheetDTO[]> {
 
   return timeEntries.map(entry => ({
     ...entry,
-    date: entry.date.toISOString(),
-    startTime: entry.startTime.toISOString(),
-    endTime: entry.endTime.toISOString(),
-    createdAt: entry.createdAt.toISOString(),
-    updatedAt: entry.updatedAt.toISOString(),
+    date: new Date(entry.date),
+    startTime: entry.startTime,
+    endTime: entry.endTime,
+    createdAt: new Date(entry.createdAt),
+    updatedAt: new Date(entry.updatedAt),
   }));
 }
 

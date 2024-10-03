@@ -8,20 +8,9 @@ import { Button } from "@/components/ui/button"
 import { PlusCircle, Clock, FileCheck, History } from "lucide-react"
 import Link from "next/link"
 import { DataTable } from "@/components/ui/data-table"
-import { columns } from "@/app/timesheets/columns"
+import {columns, Timesheet} from "@/app/timesheets/columns"
 import { useUser } from "@clerk/nextjs"
 
-interface Timesheet {
-  id: string;
-  date: Date;
-  project: string;
-  startTime: string;
-  endTime: string;
-  hours: number;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
 interface TimesheetsClientProps {
   timesheets: Timesheet[];
