@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import {cn} from "@/lib/utils"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,25 +12,25 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { UserButton } from "@clerk/nextjs"
-import { ThemeToggle } from "@/components/ThemeToggle"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHistory, faPlus, IconDefinition } from "@fortawesome/free-solid-svg-icons"
-import { faClock } from "@fortawesome/free-regular-svg-icons"
+import {UserButton} from "@clerk/nextjs"
+import {ThemeToggle} from "@/components/ThemeToggle"
+import {Clock, History, PlusCircle} from "lucide-react"
+import {useTheme} from "next-themes";
 
 export function NavigationMenuBar() {
-  const [isMounted, setIsMounted] = React.useState(false)
+  const { theme } = useTheme();
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
   return (
-    <nav className="border-b">
+    <nav className="sticky top-0 border-b bg-background z-10">
       <div className="flex h-16 items-center px-4">
         <NavigationMenu>
           <NavigationMenuList>
@@ -48,7 +48,7 @@ export function NavigationMenuBar() {
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        className={`flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md ${theme === 'dark' ? 'animate-gradient' : 'light-mode-animate-gradient'}`}
                         href="/timesheets"
                       >
                         <div className="mb-2 mt-4 text-lg font-medium">
@@ -60,13 +60,13 @@ export function NavigationMenuBar() {
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                  <ListItem href="/timesheets/create" title="Create" icon={faPlus}>
+                  <ListItem href="/timesheets/create" title="Create" icon={PlusCircle}>
                     Create a new timesheet entry
                   </ListItem>
-                  <ListItem href="/timesheets/pending" title="Pending" icon={faClock}>
+                  <ListItem href="/timesheets/pending" title="Pending" icon={Clock}>
                     View and edit pending timesheets
                   </ListItem>
-                  <ListItem href="/timesheets/history" title="History" icon={faHistory}>
+                  <ListItem href="/timesheets/history" title="History" icon={History}>
                     Access your timesheet history
                   </ListItem>
                 </ul>
@@ -80,13 +80,13 @@ export function NavigationMenuBar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { icon: IconDefinition }
->(({ className, title, children, icon, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { icon: React.ComponentType<React.SVGProps<SVGSVGElement>> }
+>(({className, title, children, icon: Icon, ...props}, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -99,7 +99,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="flex items-center space-x-2">
-            <FontAwesomeIcon icon={icon} />
+            <Icon className="h-4 w-4"/>
             <div className="text-sm font-medium leading-none">{title}</div>
           </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
